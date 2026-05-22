@@ -57,6 +57,17 @@ def engineer_features(df):
     df['Total_Jump'] = df['Vertical_Jump'] + df['Broad_Jump']
     df['Agility_Score'] = df['Agility_3cone'] + df['Shuttle']
     df['BMI'] = (df['Weight'] / (df['Height'] ** 2)) * 703
+    
+    # Advanced Physics-Based Features
+    # Momentum (p = mv), approximating velocity as distance/time (40 / Sprint_40yd)
+    df['Momentum'] = df['Weight'] * (40.0 / df['Sprint_40yd'])
+    
+    # Jump Power Index
+    df['Jump_Power_Index'] = df['Weight'] * df['Total_Jump']
+    
+    # Agility-Speed Ratio
+    df['Agility_Speed_Ratio'] = df['Agility_Score'] / df['Sprint_40yd']
+    
     df['School_Conference'] = df['School'].apply(lambda x: 'Power_5' if x in POWER_5_SCHOOLS else 'Other_Conference')
     df['Physical_Archetype'] = df.apply(get_archetype, axis=1)
     return df
