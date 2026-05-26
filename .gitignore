@@ -1,2 +1,8 @@
 .worktrees/
 .env
+drafted/
+scratch/
+src/__pycache__/
+submissions.csv
+GEMINI.md
+.gemini*
